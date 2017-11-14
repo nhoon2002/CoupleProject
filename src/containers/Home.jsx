@@ -21,8 +21,8 @@ class Home extends Component {
 
         return (
         <div className = "maindiv Home">
-			  <WeatherWidget weatherID='awcc1509266510153' ipBool='false' locationKey='347625'/>
-		
+			  {/* <WeatherWidget weatherID='awcc1509266510153' ipBool='false' locationKey='347625'/> */}
+
 		  </div>
 
 
