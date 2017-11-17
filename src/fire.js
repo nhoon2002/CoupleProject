@@ -9,6 +9,6 @@ const config = {
   messagingSenderId: "422317099707"
 };
 
-var fire = firease.initializeApp(config);
+var fire = firebase.initializeApp(config);
 
 export default fire;

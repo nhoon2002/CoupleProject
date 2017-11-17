@@ -4,6 +4,7 @@ import { browserHistory } from "react-router";
 import * as firebase from 'firebase';
 import promise from 'es6-promise'
 promise.polyfill();
+import fire from '../fire.js';
 
 // const apiKey = require('../../controller/config.js').api
 
@@ -13,6 +14,28 @@ export function sampleAction() {
 
 	}
 }
+export function authStateChange() {
+	return function(dispatch) {
+		firebase.auth().onAuthStateChanged(firebaseUser => {
+			checkSession(firebaseUser);  //This function is on the same page, scroll down!
+			if(firebaseUser) {
+				console.log('Auth status changed: logged in as: ' + firebaseUser.email);
+				console.log('Current user: %s', firebase.auth().currentUser.uid);
+			} else {
+				console.log('Auth status changed: not logged in.');
+			}
+
+		})
+
+	}
+
+}
+// export function openNav() {
+// 	return function(dispatch) {
+//
+// 	}
+//
+// }
 
 // export function fetchQuery(query) {
 // 	return function(dispatch) {
@@ -54,30 +77,30 @@ export function sampleAction() {
 // 		payload: true
 // 	}
 //  }
-// export function signOut() {
-// 		return function(dispatch) {
-// 			firebase.auth().signOut(); //signs out current user
-// 			browserHistory.push('/');
-// 			dispatch({ type: 'SESSION_NULL', payload: ""});
-//
-// 		}
-//
-//  }
-// export function checkSession(user) {
-// 	return function(dispatch) {
-// 		if (user) {
-// 			dispatch({ type: 'SESSION_EXISTS', payload: user})
-// 			console.log('browserhistory:', browserHistory);
-// 		} else {
-// 			dispatch({ type: 'SESSION_NULL', payload: ""})
-// 			console.log('current:', browserHistory.getCurrentLocation().pathname);
-//
-//
-// 			}
-//
-//  		}
-//
-//  }
+export function signOut() {
+		return function(dispatch) {
+			firebase.auth().signOut(); //signs out current user
+			browserHistory.push('/');
+			dispatch({ type: 'SESSION_NULL', payload: ""});
+
+		}
+
+ }
+export function checkSession(user) {
+	return function(dispatch) {
+		if (user) {
+			dispatch({ type: 'SESSION_EXISTS', payload: user})
+			console.log('browserhistory:', browserHistory);
+		} else {
+			dispatch({ type: 'SESSION_NULL', payload: ""})
+			console.log('current:', browserHistory.getCurrentLocation().pathname);
+
+
+			}
+
+ 		}
+
+ }
 //
 //
 //
@@ -150,6 +173,7 @@ export function SigninFacebook() {
 		  var user = result.user;
 		  console.log("facebook auth details:", user);
 		  dispatch({ type: 'FACEBOOK_CREATE_ACCOUNT_SUCESSS', payload: user});
+		  dispatch({ type: 'SESSION_EXISTS', payload: user});
 		  browserHistory.push('/');
 		  // ...
 		}).catch(function(error) {

@@ -9,11 +9,11 @@ function mapStateToProps (state) {
 	console.log("mapping STATE to PROPS", state)
 	return {
 		allData: state,
-      sampleAction: state.sampleReducer.sampleAction
+      sampleAction: state.sampleReducer.sampleAction,
 
 		// createAccount: state.createAccReducer.creatingAccount,
-		// loginStatus: state.checkSessionReducer.loggedin,
-		// currentUser: state.checkSessionReducer.currentUser,
+		loginStatus: state.checkSessionReducer.loggedin,
+		currentUser: state.checkSessionReducer.currentUser
 		// loginAccount: state.loginReducer.signinginAccount,
 		// queryData: state.tmdbReducer.dataReturned
 

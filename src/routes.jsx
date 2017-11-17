@@ -4,7 +4,7 @@ import App from './containers/App.jsx';
 import { Provider } from 'react-redux';
 import store, { history } from './store.js';
 import Home from './containers/Home.jsx';
-// import Signin from './containers/Signin.jsx';
+import Index from './containers/Index.jsx';
 // import Signup from './containers/Signup.jsx';
 // import Library from './containers/Library.jsx';
 // import Search from './containers/Search.jsx';
@@ -16,6 +16,7 @@ const theRoutes = (
 		    <Route path="/" component={App}>
 
 		      <IndexRoute component={Home}/>
+				<Route path="/index" component={Index} />
 
 				{/* <Route path='/signin' component={Signin} />
 				<Route path="/signup" component={Signup} />
