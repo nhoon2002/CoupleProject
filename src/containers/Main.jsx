@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import * as actions from '../actions/userActions.js';
+
+
+
+
 
 
 // function getNiceName(routes) {

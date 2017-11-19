@@ -14,22 +14,10 @@ export function sampleAction() {
 
 	}
 }
-export function authStateChange() {
-	return function(dispatch) {
-		firebase.auth().onAuthStateChanged(firebaseUser => {
-			checkSession(firebaseUser);  //This function is on the same page, scroll down!
-			if(firebaseUser) {
-				console.log('Auth status changed: logged in as: ' + firebaseUser.email);
-				console.log('Current user: %s', firebase.auth().currentUser.uid);
-			} else {
-				console.log('Auth status changed: not logged in.');
-			}
 
-		})
 
-	}
 
-}
+
 // export function openNav() {
 // 	return function(dispatch) {
 //
@@ -86,16 +74,20 @@ export function signOut() {
 		}
 
  }
-export function checkSession(user) {
+export function checkSession() {
 	return function(dispatch) {
-		if (user) {
-			dispatch({ type: 'SESSION_EXISTS', payload: user})
+		let firebaseUser = firebase.auth().currentUser;
+		if (firebaseUser) {
+			dispatch({ type: 'SESSION_EXISTS', payload: firebaseUser})
 			console.log('browserhistory:', browserHistory);
-		} else {
+			console.log('Auth status changed: logged in as: ' + firebaseUser.email);
+			console.log('Current user: %s', firebaseUser.uid);
+
+			}
+		else {
 			dispatch({ type: 'SESSION_NULL', payload: ""})
-			console.log('current:', browserHistory.getCurrentLocation().pathname);
-
-
+			console.log('Auth status changed: not logged in.');
+			browserHistory.push('/');
 			}
 
  		}

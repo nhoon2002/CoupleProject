@@ -15,7 +15,10 @@ class Index extends Component {
    render() {
 
       return (
-         <div></div>
+         <div>
+            <h1>This is the index</h1>
+            <button type="button" className="btn btn-warning" onClick={() => this.props.signOut()}>Log Out</button>
+         </div>
       )
 
 
